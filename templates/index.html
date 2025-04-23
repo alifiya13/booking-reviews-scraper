@@ -1,0 +1,98 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking.com Reviews Scraper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            background-color: #f8f9fa;
+        }
+        .custom-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            color: #003580; /* Booking.com blue */
+        }
+        .btn-booking {
+            background-color: #003580;
+            border-color: #003580;
+        }
+        .btn-booking:hover {
+            background-color: #00224f;
+            border-color: #00224f;
+        }
+        .result-box {
+            background-color: #e6f2ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="custom-form">
+            <div class="header">
+                <h1>Booking.com Reviews Scraper</h1>
+                <p class="text-muted">Extract all reviews from any Booking.com property</p>
+            </div>
+            
+            {% if message %}
+            <div class="alert {% if result %}alert-success{% else %}alert-info{% endif %}" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+            
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="url" class="form-label">Booking.com Hotel URL</label>
+                    <input type="url" id="url" name="url" class="form-control" 
+                           placeholder="https://www.booking.com/hotel/gb/london-visitors.html" required>
+                    <div class="form-text">Enter the URL of the hotel page on Booking.com</div>
+                </div>
+                <div class="mb-3">
+                    <label for="max-reviews" class="form-label">Maximum Reviews (optional)</label>
+                    <input type="number" id="max-reviews" name="max_reviews" class="form-control" 
+                           placeholder="Leave empty to scrape all reviews">
+                    <div class="form-text">Leave empty to scrape all available reviews</div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-booking btn-lg w-100">Scrape Reviews</button>
+            </form>
+            
+            {% if result %}
+            <div class="result-box mt-4">
+                <h4>Scraping Results</h4>
+                <p><strong>Property:</strong> {{ result.property_name }}</p>
+                <p><strong>Total Reviews Scraped:</strong> {{ result.total_reviews }}</p>
+                <p><strong>CSV File:</strong> {{ result.filename }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="mt-4">
+                <h5>How to Use</h5>
+                <ol>
+                    <li>Enter a Booking.com hotel URL (e.g., https://www.booking.com/hotel/us/destiny-palms.html)</li>
+                    <li>Optionally limit the number of reviews to scrape</li>
+                    <li>Click "Scrape Reviews" and wait for the process to complete</li>
+                    <li>Once finished, check the generated CSV file in the application folder</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
