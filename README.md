@@ -38,8 +38,6 @@ Run the Flask app:
 python app.py
 ```
 
-Then access the interface at http://localhost:5000
-
 ### API
 
 Make a POST request to `/api/booking` with a JSON payload:
@@ -64,7 +62,3 @@ The scraper saves results as CSV files with the following format:
 - rating
 - review_title
 - review_text
-
-## Notes
-
-This tool is for educational purposes only. Be sure to respect Booking.com's terms of service when using it.
